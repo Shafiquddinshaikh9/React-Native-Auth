@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 // const key = process.env.SEC_KEY;
 
 const userSchema = new mongoose.Schema({
-  Name: {
+  name: {
     type: String,
     required: true,
   },

@@ -2,8 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import cors from "cors";
-import ConnectDB from "./db/conn";
-import router from "./routes/router";
+import ConnectDB from "./db/conn.js";
+import router from "./routes/router.js";
 const app = express();
 //config file
 dotenv.config();
@@ -12,6 +12,7 @@ dotenv.config();
 ConnectDB();
 
 const PORT = process.env.PORT;
+
 //middleware
 app.use(express.json());
 app.use(cors());
