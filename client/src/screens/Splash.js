@@ -9,7 +9,7 @@ const Splash = ({ navigation }) => {
   }, []);
   return (
     <View style={styles.container}>
-      <Text>Splash</Text>
+      <Text>Splash screen</Text>
     </View>
   );
 };
