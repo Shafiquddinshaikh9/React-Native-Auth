@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button, Divider, TextInput } from "react-native-paper";
 import Animated, {
@@ -7,6 +7,8 @@ import Animated, {
   SlideOutDown,
 } from "react-native-reanimated";
 const Login = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <View style={styles.maincontainer}>
       <View style={styles.container}>
@@ -16,8 +18,21 @@ const Login = ({ navigation }) => {
           </Text>
         </View>
         <Divider style={[styles.input, { marginTop: "20px" }]} />
-        <TextInput label="Email" mode="outline" style={styles.input} />
-        <TextInput label="password" mode="outline" style={styles.input} />
+        <TextInput
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+          label="Email"
+          mode="outline"
+          style={styles.input}
+        />
+
+        <TextInput
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+          label="password"
+          mode="outline"
+          style={styles.input}
+        />
         <Button
           style={styles.btn}
           mode="contained"
@@ -75,6 +90,6 @@ const styles = StyleSheet.create({
   },
   btn: {
     borderRadius: "10px",
-    paddingVertical: "10px",
+    paddingVertical: "8px",
   },
 });
