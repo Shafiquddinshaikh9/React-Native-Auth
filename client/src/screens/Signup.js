@@ -14,15 +14,27 @@ const Signup = ({ navigation }) => {
   const [cpassword, setCPaasword] = useState("");
 
   console.log(name, email, password, cpassword);
-  const handleChange = (e) => {
-    e.preventDefault();
-
-    const { name, value } = e.target;
-    setData({ ...data, name: [value] });
-    console.log(data);
-  };
+  const handleChange = (e) => {};
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const res = await fetch(
+      "http://localhost:19006/signup" <
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+            cpassword,
+          }),
+        }
+    );
+
+    const data = await res.json();
+    console.log(data);
   };
 
   return (
