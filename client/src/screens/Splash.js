@@ -9,7 +9,7 @@ const Splash = ({ navigation }) => {
   }, []);
   return (
     <View style={styles.container}>
-      <Text>Splash screen</Text>
+      <Text style={styles.heading}>Splash screen</Text>
     </View>
   );
 };
@@ -19,8 +19,14 @@ export default Splash;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "blue",
+    color: "white",
     alignItems: "center",
     justifyContent: "center",
+  },
+  heading: {
+    color: "white",
+    fontSize: 30,
+    fontStyle: "italic",
   },
 });

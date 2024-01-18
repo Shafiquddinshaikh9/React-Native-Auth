@@ -1,10 +1,16 @@
 import { View, Text } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 
-const Home = () => {
+const Home = ({ navigation }) => {
+  useEffect(() => {
+    const user = localStorage.getItem("userID");
+    if (!user) {
+      navigation.navogate("login");
+    }
+  });
   return (
     <View>
-      <Text>Home</Text>
+      <Text>{user.name}</Text>
     </View>
   );
 };

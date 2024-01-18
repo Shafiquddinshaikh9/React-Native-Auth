@@ -1,11 +1,13 @@
 import { View, Text, StyleSheet, KeyboardAvoidingView } from "react-native";
 import React, { useState } from "react";
 import { Button, Divider, TextInput } from "react-native-paper";
+import Toast from "react-native-toast-message";
 import Animated, {
   SlideInDown,
   SlideInLeft,
   SlideOutDown,
 } from "react-native-reanimated";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const Signup = ({ navigation }) => {
   // const [data, setData] = useState({});
   const [name, setName] = useState("");
@@ -17,24 +19,40 @@ const Signup = ({ navigation }) => {
   const handleChange = (e) => {};
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(
-      "http://localhost:19006/signup" <
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            password,
-            cpassword,
-          }),
-        }
-    );
+    const res = await fetch("http://localhost:8000/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+        cpassword,
+      }),
+    });
 
     const data = await res.json();
-    console.log(data);
+    console.log(data.newUser);
+
+    if (data.code == 201) {
+      Toast.show({
+        type: "success",
+        text1: "SUCCESSFULLY",
+        text2: data.message,
+        visibilityTime: 2000,
+      });
+      setTimeout(() => {
+        navigation.navigate("home");
+      }, 2000);
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "FAILED TO SIGNUP",
+        text2: data.message,
+        visibilityTime: 2000,
+      });
+    }
   };
 
   return (
@@ -88,6 +106,7 @@ const Signup = ({ navigation }) => {
           Already have an account? Click here to login
         </Button>
       </View>
+      <Toast />
     </View>
   );
 };
