@@ -50,12 +50,27 @@ router.post("/login", async (req, res) => {
         return res.send({ message: "Invalid Credentials password", code: 401 });
       } else {
         const token = jwt.sign({ userId: isPresent._id }, process.env.KEY);
-        res.send({ message: "token genearted", token: token });
+        res.send({ message: "token genearted", token: token, code: 200 });
       }
     }
   } catch (error) {
     console.log(error);
     res.send({ message: "Server Error", code: 500 });
+  }
+});
+
+//----------HOME--------------//
+router.post("/home", async (req, res) => {
+  const { token } = req.body;
+  try {
+    const user = jwt.verify(token, JWT_SECRET);
+    const useremail = user.email;
+
+    User.findOne({ email }).then((data) => {
+      return res.send({ status: "Ok", data: data });
+    });
+  } catch (error) {
+    return res.send({ error: error });
   }
 });
 

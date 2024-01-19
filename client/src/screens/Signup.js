@@ -7,7 +7,6 @@ import Animated, {
   SlideInLeft,
   SlideOutDown,
 } from "react-native-reanimated";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 const Signup = ({ navigation }) => {
   // const [data, setData] = useState({});
   const [name, setName] = useState("");
@@ -19,7 +18,7 @@ const Signup = ({ navigation }) => {
   const handleChange = (e) => {};
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:8000/signup", {
+    const res = await fetch("http://10.0.2.2:8000/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +32,7 @@ const Signup = ({ navigation }) => {
     });
 
     const data = await res.json();
-    console.log(data.newUser);
+    console.log(data);
 
     if (data.code == 201) {
       Toast.show({
@@ -43,7 +42,7 @@ const Signup = ({ navigation }) => {
         visibilityTime: 2000,
       });
       setTimeout(() => {
-        navigation.navigate("home");
+        navigation.navigate("login");
       }, 2000);
     } else {
       Toast.show({
@@ -63,7 +62,7 @@ const Signup = ({ navigation }) => {
             Signup
           </Text>
         </View>
-        <Divider style={styles.divider} />
+        {/* <Divider style={styles.divider} /> */}
         <TextInput
           value={name}
           onChangeText={(text) => setName(text)}
@@ -122,21 +121,19 @@ const styles = StyleSheet.create({
   },
   container: {
     width: "90%",
-    borderWidth: "1px",
-    padding: "20px",
-    borderRadius: "10px",
+    borderWidth: 1,
+    padding: 20,
+    borderRadius: 10,
   },
   input: {
-    marginBottom: "20px",
+    marginBottom: 20,
   },
-  divider: {
-    height: "2px",
-    marginTop: "10px",
-  },
+
   title: {
-    fontSize: "35px",
+    fontSize: 35,
     fontStyle: "italic",
     fontWeight: "bold",
+    marginBottom: 16,
   },
   titlecenter: {
     display: "flex",
@@ -144,7 +141,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btn: {
-    paddingVertical: "10px",
-    borderRadius: "8px",
+    paddingVertical: 10,
+    borderRadius: 8,
   },
 });
