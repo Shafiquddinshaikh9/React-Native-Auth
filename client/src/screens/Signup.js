@@ -58,9 +58,7 @@ const Signup = ({ navigation }) => {
     <View style={styles.maincontainer}>
       <View style={styles.container}>
         <View style={styles.titlecenter}>
-          <Text entering={SlideInLeft} style={styles.title}>
-            Signup
-          </Text>
+          <Text style={styles.title}>Signup</Text>
         </View>
         {/* <Divider style={styles.divider} /> */}
         <TextInput

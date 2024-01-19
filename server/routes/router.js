@@ -63,12 +63,10 @@ router.post("/login", async (req, res) => {
 router.post("/home", async (req, res) => {
   const { token } = req.body;
   try {
-    const user = jwt.verify(token, JWT_SECRET);
-    const useremail = user.email;
-
-    User.findOne({ email }).then((data) => {
-      return res.send({ status: "Ok", data: data });
-    });
+    const user = jwt.verify(token, process.env.KEY);
+    console.log(user);
+    const data = await User.findOne({ _id: user.userId });
+    res.send({ message: "User details", data, code: 200 });
   } catch (error) {
     return res.send({ error: error });
   }
